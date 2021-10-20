@@ -1,0 +1,469 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#buildAccountAndRolesRelationship should build role and account relationship 1`] = `
+Object {
+  "collectedEntities": Array [
+    Object {
+      "_class": Array [
+        "User",
+      ],
+      "_key": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "account_id": "N0oChUdLTrCZLfk9JXp3Hw",
+            "account_number": 7011249145,
+            "cms_user_id": "",
+            "created_at": "2021-10-27T00:00:49Z",
+            "dept": "",
+            "email": "development@jupiterone.dev",
+            "first_name": "JupiterOne",
+            "group_ids": Array [
+              "ppUAdwEBRFCdRE0mfLttog",
+            ],
+            "host_key": "815201",
+            "id": "H9Yx0-O8QUCXVIseYAsjaA",
+            "im_group_ids": Array [],
+            "jid": "h9yx0-o8qucxviseyasjaa@xmpp.zoom.us",
+            "job_title": "",
+            "language": "",
+            "last_login_time": "2021-11-02T09:51:57Z",
+            "last_name": "Development",
+            "location": "",
+            "login_types": Array [
+              100,
+            ],
+            "personal_meeting_url": "https://zoom.us/j/4440405982?pwd=c0Jidml0ZS9ZRzA3dEZWSTNHNHlPZz09",
+            "phone_country": "",
+            "phone_number": "",
+            "pmi": 4440405982,
+            "role_id": "0",
+            "role_name": "Owner",
+            "status": "active",
+            "timezone": "America/New_York",
+            "type": 2,
+            "use_pmi": false,
+            "verified": 1,
+          },
+        },
+      ],
+      "_type": "zoom_account",
+      "active": true,
+      "createdOn": undefined,
+      "displayName": "JupiterOne Development",
+      "email": "development@jupiterone.dev",
+      "id": "H9Yx0-O8QUCXVIseYAsjaA",
+      "name": "JupiterOne Development",
+      "status": "active",
+      "username": "development@jupiterone.dev",
+    },
+    Object {
+      "_class": Array [
+        "AccessRole",
+      ],
+      "_key": "zoom_role:0",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "description": "Account owner has full privileges to access and manage a Zoom account.",
+            "id": "0",
+            "name": "Owner",
+            "total_members": 1,
+          },
+        },
+      ],
+      "_type": "zoom_role",
+      "createdOn": undefined,
+      "description": "Account owner has full privileges to access and manage a Zoom account.",
+      "displayName": "Owner",
+      "id": "0",
+      "name": "Owner",
+      "totalMembers": 1,
+    },
+    Object {
+      "_class": Array [
+        "AccessRole",
+      ],
+      "_key": "zoom_role:1",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "description": "Admins have wide range privileges to access and manage a Zoom account.",
+            "id": "1",
+            "name": "Admin",
+            "total_members": 0,
+          },
+        },
+      ],
+      "_type": "zoom_role",
+      "createdOn": undefined,
+      "description": "Admins have wide range privileges to access and manage a Zoom account.",
+      "displayName": "Admin",
+      "id": "1",
+      "name": "Admin",
+      "totalMembers": 0,
+    },
+    Object {
+      "_class": Array [
+        "AccessRole",
+      ],
+      "_key": "zoom_role:2",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "description": "Members have access to basic Zoom video meeting functions but no account management privileges.",
+            "id": "2",
+            "name": "Member",
+            "total_members": 1,
+          },
+        },
+      ],
+      "_type": "zoom_role",
+      "createdOn": undefined,
+      "description": "Members have access to basic Zoom video meeting functions but no account management privileges.",
+      "displayName": "Member",
+      "id": "2",
+      "name": "Member",
+      "totalMembers": 1,
+    },
+  ],
+  "collectedRelationships": Array [
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA",
+      "_key": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA|has|zoom_role:0",
+      "_toEntityKey": "zoom_role:0",
+      "_type": "zoom_account_has_role",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA",
+      "_key": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA|has|zoom_role:1",
+      "_toEntityKey": "zoom_role:1",
+      "_type": "zoom_account_has_role",
+      "displayName": "HAS",
+    },
+    Object {
+      "_class": "HAS",
+      "_fromEntityKey": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA",
+      "_key": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA|has|zoom_role:2",
+      "_toEntityKey": "zoom_role:2",
+      "_type": "zoom_account_has_role",
+      "displayName": "HAS",
+    },
+  ],
+  "encounteredTypes": Array [
+    "zoom_account",
+    "zoom_role",
+    "zoom_account_has_role",
+  ],
+  "numCollectedEntities": 4,
+}
+`;
+
+exports[`#buildUserAndRolesRelationship should build role and user relationship 1`] = `
+Object {
+  "collectedEntities": Array [
+    Object {
+      "_class": Array [
+        "User",
+      ],
+      "_key": "zoom_user:a18JbG_DQketjPo0Y8wYqg",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "created_at": "2021-10-28T03:49:40Z",
+            "dept": "Test",
+            "email": "tj2488801@gmail.com",
+            "first_name": "J1",
+            "group_ids": Array [
+              "ppUAdwEBRFCdRE0mfLttog",
+            ],
+            "id": "a18JbG_DQketjPo0Y8wYqg",
+            "language": "en-US",
+            "last_login_time": "2021-10-28T03:52:40Z",
+            "last_name": "Test",
+            "phone_number": "",
+            "pic_url": "https://lh3.googleusercontent.com/a/AATXAJy4ZWS6WyBZvx4Ujm476PKw65aih3KL0KVnJBTS=s96-c",
+            "pmi": 2434936199,
+            "role_id": "2",
+            "status": "active",
+            "timezone": "",
+            "type": 1,
+            "verified": 1,
+          },
+        },
+      ],
+      "_type": "zoom_user",
+      "active": true,
+      "createdAt": "2021-10-28T03:49:40Z",
+      "createdOn": undefined,
+      "dept": "Test",
+      "displayName": "J1 Test",
+      "email": "tj2488801@gmail.com",
+      "firstName": "J1",
+      "groupIds": Array [
+        "ppUAdwEBRFCdRE0mfLttog",
+      ],
+      "hostKey": undefined,
+      "id": "a18JbG_DQketjPo0Y8wYqg",
+      "language": "en-US",
+      "lastClientVersion": undefined,
+      "lastLoginTime": "2021-10-28T03:52:40Z",
+      "lastName": "Test",
+      "name": "J1 Test",
+      "phoneNumber": "",
+      "picUrl": "https://lh3.googleusercontent.com/a/AATXAJy4ZWS6WyBZvx4Ujm476PKw65aih3KL0KVnJBTS=s96-c",
+      "pmi": 2434936199,
+      "roleId": "2",
+      "status": "active",
+      "timezone": "",
+      "type": 1,
+      "username": "tj2488801@gmail.com",
+      "verified": 1,
+    },
+    Object {
+      "_class": Array [
+        "User",
+      ],
+      "_key": "zoom_user:H9Yx0-O8QUCXVIseYAsjaA",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "created_at": "2021-10-27T00:00:49Z",
+            "email": "development@jupiterone.dev",
+            "first_name": "JupiterOne",
+            "group_ids": Array [
+              "ppUAdwEBRFCdRE0mfLttog",
+            ],
+            "id": "H9Yx0-O8QUCXVIseYAsjaA",
+            "language": "",
+            "last_login_time": "2021-10-29T04:50:20Z",
+            "last_name": "Development",
+            "phone_number": "",
+            "pmi": 4440405982,
+            "role_id": "0",
+            "status": "active",
+            "timezone": "America/New_York",
+            "type": 2,
+            "verified": 1,
+          },
+        },
+      ],
+      "_type": "zoom_user",
+      "active": true,
+      "createdAt": "2021-10-27T00:00:49Z",
+      "createdOn": undefined,
+      "dept": undefined,
+      "displayName": "JupiterOne Development",
+      "email": "development@jupiterone.dev",
+      "firstName": "JupiterOne",
+      "groupIds": Array [
+        "ppUAdwEBRFCdRE0mfLttog",
+      ],
+      "hostKey": undefined,
+      "id": "H9Yx0-O8QUCXVIseYAsjaA",
+      "language": "",
+      "lastClientVersion": undefined,
+      "lastLoginTime": "2021-10-29T04:50:20Z",
+      "lastName": "Development",
+      "name": "JupiterOne Development",
+      "phoneNumber": "",
+      "picUrl": undefined,
+      "pmi": 4440405982,
+      "roleId": "0",
+      "status": "active",
+      "timezone": "America/New_York",
+      "type": 2,
+      "username": "development@jupiterone.dev",
+      "verified": 1,
+    },
+    Object {
+      "_class": Array [
+        "AccessRole",
+      ],
+      "_key": "zoom_role:0",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "description": "Account owner has full privileges to access and manage a Zoom account.",
+            "id": "0",
+            "name": "Owner",
+            "total_members": 1,
+          },
+        },
+      ],
+      "_type": "zoom_role",
+      "createdOn": undefined,
+      "description": "Account owner has full privileges to access and manage a Zoom account.",
+      "displayName": "Owner",
+      "id": "0",
+      "name": "Owner",
+      "totalMembers": 1,
+    },
+    Object {
+      "_class": Array [
+        "AccessRole",
+      ],
+      "_key": "zoom_role:1",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "description": "Admins have wide range privileges to access and manage a Zoom account.",
+            "id": "1",
+            "name": "Admin",
+            "total_members": 0,
+          },
+        },
+      ],
+      "_type": "zoom_role",
+      "createdOn": undefined,
+      "description": "Admins have wide range privileges to access and manage a Zoom account.",
+      "displayName": "Admin",
+      "id": "1",
+      "name": "Admin",
+      "totalMembers": 0,
+    },
+    Object {
+      "_class": Array [
+        "AccessRole",
+      ],
+      "_key": "zoom_role:2",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "description": "Members have access to basic Zoom video meeting functions but no account management privileges.",
+            "id": "2",
+            "name": "Member",
+            "total_members": 1,
+          },
+        },
+      ],
+      "_type": "zoom_role",
+      "createdOn": undefined,
+      "description": "Members have access to basic Zoom video meeting functions but no account management privileges.",
+      "displayName": "Member",
+      "id": "2",
+      "name": "Member",
+      "totalMembers": 1,
+    },
+  ],
+  "collectedRelationships": Array [
+    Object {
+      "_class": "ASSIGNED",
+      "_fromEntityKey": "zoom_user:H9Yx0-O8QUCXVIseYAsjaA",
+      "_key": "zoom_user:H9Yx0-O8QUCXVIseYAsjaA|assigned|zoom_role:0",
+      "_toEntityKey": "zoom_role:0",
+      "_type": "zoom_user_assigned_role",
+      "displayName": "ASSIGNED",
+    },
+    Object {
+      "_class": "ASSIGNED",
+      "_fromEntityKey": "zoom_user:a18JbG_DQketjPo0Y8wYqg",
+      "_key": "zoom_user:a18JbG_DQketjPo0Y8wYqg|assigned|zoom_role:2",
+      "_toEntityKey": "zoom_role:2",
+      "_type": "zoom_user_assigned_role",
+      "displayName": "ASSIGNED",
+    },
+  ],
+  "encounteredTypes": Array [
+    "zoom_user",
+    "zoom_role",
+    "zoom_user_assigned_role",
+  ],
+  "numCollectedEntities": 5,
+}
+`;
+
+exports[`#fetchRoles should collect data 1`] = `
+Object {
+  "collectedEntities": Array [
+    Object {
+      "_class": Array [
+        "AccessRole",
+      ],
+      "_key": "zoom_role:0",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "description": "Account owner has full privileges to access and manage a Zoom account.",
+            "id": "0",
+            "name": "Owner",
+            "total_members": 1,
+          },
+        },
+      ],
+      "_type": "zoom_role",
+      "createdOn": undefined,
+      "description": "Account owner has full privileges to access and manage a Zoom account.",
+      "displayName": "Owner",
+      "id": "0",
+      "name": "Owner",
+      "totalMembers": 1,
+    },
+    Object {
+      "_class": Array [
+        "AccessRole",
+      ],
+      "_key": "zoom_role:1",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "description": "Admins have wide range privileges to access and manage a Zoom account.",
+            "id": "1",
+            "name": "Admin",
+            "total_members": 0,
+          },
+        },
+      ],
+      "_type": "zoom_role",
+      "createdOn": undefined,
+      "description": "Admins have wide range privileges to access and manage a Zoom account.",
+      "displayName": "Admin",
+      "id": "1",
+      "name": "Admin",
+      "totalMembers": 0,
+    },
+    Object {
+      "_class": Array [
+        "AccessRole",
+      ],
+      "_key": "zoom_role:2",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "description": "Members have access to basic Zoom video meeting functions but no account management privileges.",
+            "id": "2",
+            "name": "Member",
+            "total_members": 1,
+          },
+        },
+      ],
+      "_type": "zoom_role",
+      "createdOn": undefined,
+      "description": "Members have access to basic Zoom video meeting functions but no account management privileges.",
+      "displayName": "Member",
+      "id": "2",
+      "name": "Member",
+      "totalMembers": 1,
+    },
+  ],
+  "encounteredTypes": Array [
+    "zoom_role",
+  ],
+  "numCollectedEntities": 3,
+}
+`;

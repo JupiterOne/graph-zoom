@@ -1,4 +1,5 @@
 import { IntegrationInvocationConfig } from '@jupiterone/integration-sdk-core';
+import getStepStartStates from './getStepStartStates';
 import { integrationSteps } from './steps';
 import {
   validateInvocation,
@@ -9,5 +10,6 @@ import {
 export const invocationConfig: IntegrationInvocationConfig<IntegrationConfig> = {
   instanceConfigFields,
   validateInvocation,
+  getStepStartStates,
   integrationSteps,
 };

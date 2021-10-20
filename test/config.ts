@@ -7,10 +7,10 @@ if (process.env.LOAD_ENV) {
     path: path.join(__dirname, '../.env'),
   });
 }
-const DEFAULT_CLIENT_ID = 'dummy-acme-client-id';
-const DEFAULT_CLIENT_SECRET = 'dummy-acme-client-secret';
+const DEFAULT_ZOOM_ACCESS_TOKEN = 'dummy-zoom-access-token';
+const DEFAULT_SCOPES = 'dummy-zoom-scopes-list';
 
 export const integrationConfig: IntegrationConfig = {
-  clientId: process.env.CLIENT_ID || DEFAULT_CLIENT_ID,
-  clientSecret: process.env.CLIENT_SECRET || DEFAULT_CLIENT_SECRET,
+  zoomAccessToken: process.env.ZOOM_ACCESS_TOKEN || DEFAULT_ZOOM_ACCESS_TOKEN,
+  scopes: process.env.SCOPES || DEFAULT_SCOPES,
 };

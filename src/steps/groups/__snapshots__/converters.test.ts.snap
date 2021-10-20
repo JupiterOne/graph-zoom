@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#createGroupEntity should convert to entity 1`] = `
+Object {
+  "_class": Array [
+    "Group",
+  ],
+  "_key": "zoom_group:sample-id",
+  "_rawData": Array [
+    Object {
+      "name": "default",
+      "rawData": Object {
+        "directory_privacy": 2,
+        "id": "sample-id",
+        "name": "group-name",
+        "total_members": 420,
+      },
+    },
+  ],
+  "_type": "zoom_group",
+  "createdOn": undefined,
+  "directoryPrivacy": 2,
+  "displayName": "group-name",
+  "id": "sample-id",
+  "name": "group-name",
+  "totalMembers": 420,
+}
+`;

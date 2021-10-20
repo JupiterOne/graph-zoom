@@ -1,120 +1,254 @@
-import http from 'http';
+import fetch, { Response } from 'node-fetch';
 
-import { IntegrationProviderAuthenticationError } from '@jupiterone/integration-sdk-core';
+import {
+  IntegrationProviderAPIError,
+  IntegrationProviderAuthenticationError,
+} from '@jupiterone/integration-sdk-core';
 
 import { IntegrationConfig } from './config';
-import { AcmeUser, AcmeGroup } from './types';
+import {
+  GroupsResponse,
+  PageIteratee,
+  PaginatedUserInGroupsResponse,
+  PaginatedUserInRolesResponse,
+  PaginatedUsers,
+  RolesResponse,
+  ZoomGroup,
+  ZoomGroupMember,
+  ZoomRole,
+  ZoomRoleMember,
+  ZoomUser,
+  ZoomUserSettings,
+  ZoomUserSettingsMeetingAuthentication,
+  ZoomUserSettingsMeetingSecurity,
+  ZoomUserSettingsRecordingAuthentication,
+} from './types';
 
 export type ResourceIteratee<T> = (each: T) => Promise<void> | void;
 
-/**
- * An APIClient maintains authentication state and provides an interface to
- * third party data APIs.
- *
- * It is recommended that integrations wrap provider data APIs to provide a
- * place to handle error responses and implement common patterns for iterating
- * resources.
- */
 export class APIClient {
   constructor(readonly config: IntegrationConfig) {}
 
-  public async verifyAuthentication(): Promise<void> {
-    // TODO make the most light-weight request possible to validate
-    // authentication works with the provided credentials, throw an err if
-    // authentication fails
-    const request = new Promise<void>((resolve, reject) => {
-      http.get(
-        {
-          hostname: 'localhost',
-          port: 443,
-          path: '/api/v1/some/endpoint?limit=1',
-          agent: false,
-          timeout: 10,
-        },
-        (res) => {
-          if (res.statusCode !== 200) {
-            reject(new Error('Provider authentication failed'));
-          } else {
-            resolve();
-          }
-        },
-      );
-    });
+  private readonly paginateEntitiesPerPage = 30;
 
-    try {
-      await request;
-    } catch (err) {
-      throw new IntegrationProviderAuthenticationError({
-        cause: err,
-        endpoint: 'https://localhost/api/v1/some/endpoint?limit=1',
-        status: err.status,
-        statusText: err.statusText,
+  private withBaseUri(path: string): string {
+    return `https://api.zoom.us/v2/${path}`;
+  }
+
+  private async request(
+    uri: string,
+    method: 'GET' | 'HEAD' = 'GET',
+  ): Promise<Response> {
+    const response = await fetch(uri, {
+      method,
+      headers: {
+        Authorization: `Bearer ${this.config.zoomAccessToken}`,
+      },
+    });
+    if (!response.ok) {
+      throw new IntegrationProviderAPIError({
+        endpoint: uri,
+        status: response.status,
+        statusText: response.statusText,
       });
     }
+    return response;
   }
 
-  /**
-   * Iterates each user resource in the provider.
-   *
-   * @param iteratee receives each resource to produce entities/relationships
-   */
+  // OAuth scope: 'user:read:admin'
+  public async getCurrentUser(): Promise<ZoomUser> {
+    const endpoint = this.withBaseUri(`users/me`);
+    const response = await this.request(endpoint, 'GET');
+    return (await response.json()) as ZoomUser;
+  }
+
+  // OAuth scope: 'user:read:admin'
   public async iterateUsers(
-    iteratee: ResourceIteratee<AcmeUser>,
+    pageIteratee: PageIteratee<ZoomUser>,
   ): Promise<void> {
-    // TODO paginate an endpoint, invoke the iteratee with each record in the
-    // page
-    //
-    // The provider API will hopefully support pagination. Functions like this
-    // should maintain pagination state, and for each page, for each record in
-    // the page, invoke the `ResourceIteratee`. This will encourage a pattern
-    // where each resource is processed and dropped from memory.
+    let body: PaginatedUsers;
+    let pageNumber = 1;
 
-    const users: AcmeUser[] = [
-      {
-        id: 'acme-user-1',
-        name: 'User One',
-      },
-      {
-        id: 'acme-user-2',
-        name: 'User Two',
-      },
-    ];
+    do {
+      const endpoint = this.withBaseUri(
+        `users?page_size=${this.paginateEntitiesPerPage}&page_number=${pageNumber}`,
+      );
+      const response = await this.request(endpoint, 'GET');
 
-    for (const user of users) {
-      await iteratee(user);
+      if (!response.ok) {
+        throw new IntegrationProviderAPIError({
+          endpoint: '/users',
+          status: response.status,
+          statusText: response.statusText,
+        });
+      }
+
+      body = await response.json();
+
+      for (const user of body.users) {
+        await pageIteratee(user);
+      }
+
+      pageNumber = body.page_number + 1;
+    } while (pageNumber <= body.page_count);
+  }
+
+  // OAuth scope: 'group:read:admin'
+  public async iterateGroups(
+    pageIteratee: PageIteratee<ZoomGroup>,
+  ): Promise<void> {
+    const groupsApiRoute = this.withBaseUri('groups');
+
+    const response = await this.request(groupsApiRoute, 'GET');
+    const body: GroupsResponse = await response.json();
+
+    for (const group of body.groups) {
+      await pageIteratee(group);
     }
   }
 
-  /**
-   * Iterates each group resource in the provider.
-   *
-   * @param iteratee receives each resource to produce entities/relationships
-   */
-  public async iterateGroups(
-    iteratee: ResourceIteratee<AcmeGroup>,
+  // OAuth scope: 'group:read:admins'
+  public async iterateUsersInGroup(
+    groupId: string,
+    pageIteratee: PageIteratee<ZoomGroupMember>,
   ): Promise<void> {
-    // TODO paginate an endpoint, invoke the iteratee with each record in the
-    // page
-    //
-    // The provider API will hopefully support pagination. Functions like this
-    // should maintain pagination state, and for each page, for each record in
-    // the page, invoke the `ResourceIteratee`. This will encourage a pattern
-    // where each resource is processed and dropped from memory.
+    let body: PaginatedUserInGroupsResponse;
+    let pageNumber = 1;
 
-    const groups: AcmeGroup[] = [
-      {
-        id: 'acme-group-1',
-        name: 'Group One',
-        users: [
-          {
-            id: 'acme-user-1',
-          },
-        ],
-      },
-    ];
+    do {
+      const endpoint = this.withBaseUri(
+        `groups/${groupId}/members?page_size=${this.paginateEntitiesPerPage}&page_number=${pageNumber}`,
+      );
+      const response = await this.request(endpoint, 'GET');
 
-    for (const group of groups) {
-      await iteratee(group);
+      if (!response.ok) {
+        throw new IntegrationProviderAPIError({
+          endpoint: 'groups/{groupId}/members',
+          status: response.status,
+          statusText: response.statusText,
+        });
+      }
+
+      body = await response.json();
+
+      for (const member of body.members) {
+        await pageIteratee(member);
+      }
+
+      pageNumber = body.page_count + 1;
+    } while (pageNumber <= body.page_count);
+  }
+
+  // OAuth scope: 'role:read:admin'
+  public async iterateRoles(
+    pageIteratee: PageIteratee<ZoomRole>,
+  ): Promise<void> {
+    const rolesApiRoute = this.withBaseUri('roles');
+
+    const response = await this.request(rolesApiRoute, 'GET');
+    const body: RolesResponse = await response.json();
+
+    for (const role of body.roles) {
+      await pageIteratee(role);
+    }
+  }
+
+  // OAuth scope: 'role:read:admin'
+  public async iterateUsersInRole(
+    roleId: string,
+    pageIteratee: PageIteratee<ZoomRoleMember>,
+  ): Promise<void> {
+    let body: PaginatedUserInRolesResponse;
+    let pageNumber = 1;
+
+    do {
+      const endpoint = this.withBaseUri(
+        `roles/${roleId}/members?page_size=${this.paginateEntitiesPerPage}&page_number=${pageNumber}`,
+      );
+      const response = await this.request(endpoint, 'GET');
+
+      if (!response.ok) {
+        throw new IntegrationProviderAPIError({
+          endpoint: 'roles/{roleId}/members',
+          status: response.status,
+          statusText: response.statusText,
+        });
+      }
+
+      body = await response.json();
+
+      for (const member of body.members) {
+        await pageIteratee(member);
+      }
+
+      pageNumber = body.page_count + 1;
+    } while (pageNumber <= body.page_count);
+  }
+
+  // OAuth scope: 'user:read:admin'
+  public async getUserSettings(userId: string): Promise<ZoomUserSettings> {
+    const userSettingsApiRoute = this.withBaseUri(`users/${userId}/settings`);
+
+    const response = await this.request(userSettingsApiRoute, 'GET');
+    return response.json();
+  }
+
+  // OAuth scope: 'user:read:admin'
+  public async getUserSettingsMeetingAuthentication(
+    userId: string,
+  ): Promise<ZoomUserSettingsMeetingAuthentication> {
+    const userSettingsMeetingAuthenticationApiRoute = this.withBaseUri(
+      `users/${userId}/settings?option=meeting_authentication`,
+    );
+
+    const response = await this.request(
+      userSettingsMeetingAuthenticationApiRoute,
+      'GET',
+    );
+
+    return response.json();
+  }
+
+  // OAuth scope: 'user:read:admin'
+  public async getUserSettingsRecordingAuthentication(
+    userId: string,
+  ): Promise<ZoomUserSettingsRecordingAuthentication> {
+    const userSettingsRecordingAuthenticationApiRoute = this.withBaseUri(
+      `users/${userId}/settings?option=recording_authentication`,
+    );
+
+    const response = await this.request(
+      userSettingsRecordingAuthenticationApiRoute,
+      'GET',
+    );
+    return response.json();
+  }
+
+  // OAuth scope: 'user:read:admin'
+  public async getUserSettingsMeetingSecurity(
+    userId: string,
+  ): Promise<ZoomUserSettingsMeetingSecurity> {
+    const userSettingsMeetingSecurityApiRoute = this.withBaseUri(
+      `users/${userId}/settings?option=meeting_security`,
+    );
+
+    const response = await this.request(
+      userSettingsMeetingSecurityApiRoute,
+      'GET',
+    );
+    return response.json();
+  }
+
+  public async verifyAuthentication(): Promise<void> {
+    const usersApiRoute = this.withBaseUri('users/me');
+    try {
+      await this.request(usersApiRoute, 'GET');
+    } catch (err) {
+      throw new IntegrationProviderAuthenticationError({
+        endpoint: usersApiRoute,
+        status: err.code,
+        statusText: err.message,
+      });
     }
   }
 }
