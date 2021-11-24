@@ -8,16 +8,16 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.0.0] - 2021-11-24
+
 ### Added
 
 - Ingest new entity `zoom_user`
 - Ingest new entity `zoom_group`
 - Ingest new entity `zoom_role`
 - Ingest new entity `zoom_account`
-- Ingest new entity `zoom_user_settings`
 - Build new relationship `zoom_account_has_user`
 - Build new relationship `zoom_account_has_group`
 - Build new relationship `zoom_account_has_role`
 - Build new relationship `zoom_group_has_user`
 - Build new relationship `zoom_user_assigned_role`
-- Build new relationship `zoom_user_has_settings`
