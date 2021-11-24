@@ -186,57 +186,75 @@ export class APIClient {
   }
 
   // OAuth scope: 'user:read:admin'
-  public async getUserSettings(userId: string): Promise<ZoomUserSettings> {
-    const userSettingsApiRoute = this.withBaseUri(`users/${userId}/settings`);
+  public async getUserSettings(
+    userId: string,
+  ): Promise<ZoomUserSettings | undefined> {
+    try {
+      const userSettingsApiRoute = this.withBaseUri(`users/${userId}/settings`);
 
-    const response = await this.request(userSettingsApiRoute, 'GET');
-    return response.json();
+      const response = await this.request(userSettingsApiRoute, 'GET');
+      return response.json();
+    } catch (err) {
+      return undefined;
+    }
   }
 
   // OAuth scope: 'user:read:admin'
   public async getUserSettingsMeetingAuthentication(
     userId: string,
-  ): Promise<ZoomUserSettingsMeetingAuthentication> {
-    const userSettingsMeetingAuthenticationApiRoute = this.withBaseUri(
-      `users/${userId}/settings?option=meeting_authentication`,
-    );
+  ): Promise<ZoomUserSettingsMeetingAuthentication | undefined> {
+    try {
+      const userSettingsMeetingAuthenticationApiRoute = this.withBaseUri(
+        `users/${userId}/settings?option=meeting_authentication`,
+      );
 
-    const response = await this.request(
-      userSettingsMeetingAuthenticationApiRoute,
-      'GET',
-    );
+      const response = await this.request(
+        userSettingsMeetingAuthenticationApiRoute,
+        'GET',
+      );
 
-    return response.json();
+      return response.json();
+    } catch (err) {
+      return undefined;
+    }
   }
 
   // OAuth scope: 'user:read:admin'
   public async getUserSettingsRecordingAuthentication(
     userId: string,
-  ): Promise<ZoomUserSettingsRecordingAuthentication> {
-    const userSettingsRecordingAuthenticationApiRoute = this.withBaseUri(
-      `users/${userId}/settings?option=recording_authentication`,
-    );
+  ): Promise<ZoomUserSettingsRecordingAuthentication | undefined> {
+    try {
+      const userSettingsRecordingAuthenticationApiRoute = this.withBaseUri(
+        `users/${userId}/settings?option=recording_authentication`,
+      );
 
-    const response = await this.request(
-      userSettingsRecordingAuthenticationApiRoute,
-      'GET',
-    );
-    return response.json();
+      const response = await this.request(
+        userSettingsRecordingAuthenticationApiRoute,
+        'GET',
+      );
+      return response.json();
+    } catch (err) {
+      return undefined;
+    }
   }
 
   // OAuth scope: 'user:read:admin'
   public async getUserSettingsMeetingSecurity(
     userId: string,
-  ): Promise<ZoomUserSettingsMeetingSecurity> {
-    const userSettingsMeetingSecurityApiRoute = this.withBaseUri(
-      `users/${userId}/settings?option=meeting_security`,
-    );
+  ): Promise<ZoomUserSettingsMeetingSecurity | undefined> {
+    try {
+      const userSettingsMeetingSecurityApiRoute = this.withBaseUri(
+        `users/${userId}/settings?option=meeting_security`,
+      );
 
-    const response = await this.request(
-      userSettingsMeetingSecurityApiRoute,
-      'GET',
-    );
-    return response.json();
+      const response = await this.request(
+        userSettingsMeetingSecurityApiRoute,
+        'GET',
+      );
+      return response.json();
+    } catch (err) {
+      return undefined;
+    }
   }
 
   public async verifyAuthentication(): Promise<void> {

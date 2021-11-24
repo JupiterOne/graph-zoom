@@ -96,13 +96,12 @@ https://github.com/JupiterOne/sdk/blob/main/docs/integrations/development.md
 
 The following entities are created:
 
-| Resources     | Entity `_type`       | Entity `_class` |
-| ------------- | -------------------- | --------------- |
-| Account       | `zoom_account`       | `User`          |
-| Group         | `zoom_group`         | `Group`         |
-| Role          | `zoom_role`          | `AccessRole`    |
-| User          | `zoom_user`          | `User`          |
-| User Settings | `zoom_user_settings` | `Configuration` |
+| Resources | Entity `_type` | Entity `_class` |
+| --------- | -------------- | --------------- |
+| Account   | `zoom_account` | `User`          |
+| Group     | `zoom_group`   | `Group`         |
+| Role      | `zoom_role`    | `AccessRole`    |
+| User      | `zoom_user`    | `User`          |
 
 ### Relationships
 
@@ -115,7 +114,6 @@ The following relationships are created:
 | `zoom_account`        | **HAS**               | `zoom_user`           |
 | `zoom_group`          | **HAS**               | `zoom_user`           |
 | `zoom_user`           | **ASSIGNED**          | `zoom_role`           |
-| `zoom_user`           | **HAS**               | `zoom_user_settings`  |
 
 <!--
 ********************************************************************************

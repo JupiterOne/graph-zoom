@@ -46,9 +46,6 @@ export default function getStepStartStates(
     [IntegrationSteps.USERS]: {
       disabled: !enabledScopes.includes('user:read:admin'),
     },
-    [IntegrationSteps.USER_SETTINGS]: {
-      disabled: !enabledScopes.includes('user:read:admin'),
-    },
   };
 
   logger.info(
