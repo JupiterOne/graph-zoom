@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`#fetchAccount should collect data 1`] = `
+Object {
+  "collectedEntities": Array [
+    Object {
+      "_class": Array [
+        "User",
+      ],
+      "_key": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "account_id": "N0oChUdLTrCZLfk9JXp3Hw",
+            "account_number": 7011249145,
+            "cms_user_id": "",
+            "created_at": "2021-10-27T00:00:49Z",
+            "dept": "",
+            "email": "development@jupiterone.dev",
+            "first_name": "JupiterOne",
+            "group_ids": Array [
+              "ppUAdwEBRFCdRE0mfLttog",
+            ],
+            "host_key": "815201",
+            "id": "H9Yx0-O8QUCXVIseYAsjaA",
+            "im_group_ids": Array [],
+            "jid": "h9yx0-o8qucxviseyasjaa@xmpp.zoom.us",
+            "job_title": "",
+            "language": "",
+            "last_login_time": "2021-11-02T09:51:57Z",
+            "last_name": "Development",
+            "location": "",
+            "login_types": Array [
+              100,
+            ],
+            "personal_meeting_url": "https://zoom.us/j/4440405982?pwd=c0Jidml0ZS9ZRzA3dEZWSTNHNHlPZz09",
+            "phone_country": "",
+            "phone_number": "",
+            "pmi": 4440405982,
+            "role_id": "0",
+            "role_name": "Owner",
+            "status": "active",
+            "timezone": "America/New_York",
+            "type": 2,
+            "use_pmi": false,
+            "verified": 1,
+          },
+        },
+      ],
+      "_type": "zoom_account",
+      "active": true,
+      "createdOn": undefined,
+      "displayName": "JupiterOne Development",
+      "email": "development@jupiterone.dev",
+      "id": "H9Yx0-O8QUCXVIseYAsjaA",
+      "name": "JupiterOne Development",
+      "status": "active",
+      "username": "development@jupiterone.dev",
+    },
+  ],
+  "encounteredTypes": Array [
+    "zoom_account",
+  ],
+  "numCollectedEntities": 1,
+}
+`;
