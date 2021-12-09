@@ -1,4 +1,5 @@
 import fetch, { Response } from 'node-fetch';
+import { retry } from '@lifeomic/attempt';
 
 import {
   IntegrationProviderAPIError,
@@ -39,20 +40,44 @@ export class APIClient {
     uri: string,
     method: 'GET' | 'HEAD' = 'GET',
   ): Promise<Response> {
-    const response = await fetch(uri, {
-      method,
-      headers: {
-        Authorization: `Bearer ${this.config.zoomAccessToken}`,
-      },
-    });
-    if (!response.ok) {
+    try {
+      const result = await retry(
+        async () => {
+          const response = await fetch(uri, {
+            method,
+            headers: {
+              Authorization: `Bearer ${this.config.zoomAccessToken}`,
+            },
+          });
+          if (!response.ok) {
+            throw new IntegrationProviderAPIError({
+              endpoint: uri,
+              status: response.status,
+              statusText: response.statusText,
+            });
+          }
+          return response;
+        },
+        {
+          delay: 5000,
+          factor: 2,
+          maxAttempts: 10,
+          // only retry on 429
+          handleError: (err, context) => {
+            if (err.status !== 429) {
+              context.abort();
+            }
+          },
+        },
+      );
+      return result;
+    } catch (error) {
       throw new IntegrationProviderAPIError({
         endpoint: uri,
-        status: response.status,
-        statusText: response.statusText,
+        status: error.status,
+        statusText: error.statusText,
       });
     }
-    return response;
   }
 
   // OAuth scope: 'user:read:admin'
