@@ -27,6 +27,14 @@ import {
 
 export type ResourceIteratee<T> = (each: T) => Promise<void> | void;
 
+class ResponseError extends IntegrationProviderAPIError {
+  response: Response;
+  constructor(options) {
+    super(options);
+    this.response = options.response;
+  }
+}
+
 export class APIClient {
   constructor(readonly config: IntegrationConfig) {}
 
@@ -50,21 +58,23 @@ export class APIClient {
             },
           });
           if (!response.ok) {
-            throw new IntegrationProviderAPIError({
+            throw new ResponseError({
               endpoint: uri,
               status: response.status,
               statusText: response.statusText,
+              response,
             });
           }
           return response;
         },
         {
-          delay: 5000,
+          delay: 1000,
           factor: 2,
           maxAttempts: 10,
-          // only retry on 429
           handleError: (err, context) => {
-            if (err.status !== 429) {
+            const rateLimitType = err.response.headers.get('X-RateLimit-Type');
+            // only retry on 429 && per second limit
+            if (!(err.status === 429 && rateLimitType === 'QPS')) {
               context.abort();
             }
           },
