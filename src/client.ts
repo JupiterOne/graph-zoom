@@ -1,4 +1,5 @@
 import fetch, { Response } from 'node-fetch';
+import { retry } from '@lifeomic/attempt';
 
 import {
   IntegrationProviderAPIError,
@@ -26,6 +27,14 @@ import {
 
 export type ResourceIteratee<T> = (each: T) => Promise<void> | void;
 
+class ResponseError extends IntegrationProviderAPIError {
+  response: Response;
+  constructor(options) {
+    super(options);
+    this.response = options.response;
+  }
+}
+
 export class APIClient {
   constructor(readonly config: IntegrationConfig) {}
 
@@ -39,20 +48,46 @@ export class APIClient {
     uri: string,
     method: 'GET' | 'HEAD' = 'GET',
   ): Promise<Response> {
-    const response = await fetch(uri, {
-      method,
-      headers: {
-        Authorization: `Bearer ${this.config.zoomAccessToken}`,
-      },
-    });
-    if (!response.ok) {
+    try {
+      const result = await retry(
+        async () => {
+          const response = await fetch(uri, {
+            method,
+            headers: {
+              Authorization: `Bearer ${this.config.zoomAccessToken}`,
+            },
+          });
+          if (!response.ok) {
+            throw new ResponseError({
+              endpoint: uri,
+              status: response.status,
+              statusText: response.statusText,
+              response,
+            });
+          }
+          return response;
+        },
+        {
+          delay: 1000,
+          factor: 2,
+          maxAttempts: 10,
+          handleError: (err, context) => {
+            const rateLimitType = err.response.headers.get('X-RateLimit-Type');
+            // only retry on 429 && per second limit
+            if (!(err.status === 429 && rateLimitType === 'QPS')) {
+              context.abort();
+            }
+          },
+        },
+      );
+      return result;
+    } catch (error) {
       throw new IntegrationProviderAPIError({
         endpoint: uri,
-        status: response.status,
-        statusText: response.statusText,
+        status: error.status,
+        statusText: error.statusText,
       });
     }
-    return response;
   }
 
   // OAuth scope: 'user:read:admin'
