@@ -2,9 +2,6 @@
 
 ## Zoom + JupiterOne Integration Benefits
 
-TODO: Iterate the benefits of ingesting data from the provider into JupiterOne.
-Consider the following examples:
-
 - Visualize Zoom user, user settings, roles, and groups in the JupiterOne graph.
 - Map Zoom users to employees in your JupiterOne account.
 - Monitor changes to ingested Zoom resources using JupiterOne alerts.
@@ -35,21 +32,14 @@ If you need help with this integration, please contact
 
 1. Go to [Create App](https://marketplace.zoom.us/develop/create) page on Zoom
    Marketplace and click 'Create' under the OAuth app type.
-
 2. Enter an app name and choose the 'Account-level app' option. The publish app
    option will depend on your needs.
-
 3. Take note of your `Client ID` and your `Client secret` and supply it to the
    [oauth-server's .env](../oauth-server/README.md).
-
 4. Enter 'http://localhost:5000/redirect' to the Redirect URL for OAuth.
-
 5. Add 'http://localhost:5000/redirect' to the OAuth allow list.
-
 6. Supply the required information.
-
 7. On scopes, add `group:read:admin`, `role:read:admin`, and `user:read:admin`.
-
 8. The app is now ready. Proceed to authentication to generate your
    `ZOOM_ACCESS_TOKEN`.
 
@@ -58,17 +48,14 @@ If you need help with this integration, please contact
 1. From the configuration **Gear Icon**, select **Integrations**.
 2. Scroll to the **Zoom** integration tile and click it.
 3. Click the **Add Configuration** button and configure the following settings:
-
-- Enter the **Account Name** by which you'd like to identify this Zoom account
-  in JupiterOne. Ingested entities will have this value stored in
-  `tag.AccountName` when **Tag with Account Name** is checked.
-- Enter a **Description** that will further assist your team when identifying
-  the integration instance.
-- Select a **Polling Interval** that you feel is sufficient for your monitoring
-  needs. You may leave this as `DISABLED` and manually execute the integration.
-- {{additional provider-specific settings}} Enter the **Zoom API Key** generated
-  for use by JupiterOne.
-
+    - Enter the **Account Name** by which you'd like to identify this Zoom account
+      in JupiterOne. Ingested entities will have this value stored in
+      `tag.AccountName` when **Tag with Account Name** is checked.
+    - Enter a **Description** that will further assist your team when identifying
+      the integration instance.
+    - Select a **Polling Interval** that you feel is sufficient for your monitoring
+      needs. You may leave this as `DISABLED` and manually execute the integration.
+    - Enter the **Zoom API Key** generated for use by JupiterOne.
 4. Click **Create Configuration** once all values are provided.
 
 # How to Uninstall
