@@ -1,4 +1,7 @@
-import { createIntegrationEntity } from '@jupiterone/integration-sdk-core';
+import {
+  createIntegrationEntity,
+  Entity,
+} from '@jupiterone/integration-sdk-core';
 import { Entities } from '../constants';
 import { ZoomUser } from '../../types';
 
@@ -6,7 +9,7 @@ export function getAccountKey(id: string): string {
   return `zoom_account:${id}`;
 }
 
-export function createAccountEntity(data: ZoomUser) {
+export function createAccountEntity(data: ZoomUser): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,
