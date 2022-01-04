@@ -31,9 +31,9 @@ questions:
       on their account.
     queries:
       - name: good
-        query: FIND zoom_user WITH zu.inMeetingE2eEncryption=true AS zu RETURN zu.displayName, zu.username, zu.id
+        query: FIND zoom_user WITH inMeetingE2eEncryption=true AS zu RETURN zu.displayName, zu.username, zu.id
       - name: bad
-        query: FIND zoom_user WITH zu.inMeetingE2eEncryption!=true AS zu RETURN zu.displayName, zu.username, zu.id
+        query: FIND zoom_user WITH inMeetingE2eEncryption!=true AS zu RETURN zu.displayName, zu.username, zu.id
     tags:
       - zoom
       - user
