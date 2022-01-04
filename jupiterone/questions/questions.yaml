@@ -7,7 +7,7 @@ questions:
     description: Returns a list of users with Zoom access.
     queries:
       - name: good
-        query: FIND zoom_user AS zu RETURN zu.username
+        query: FIND zoom_user AS zu RETURN zu.displayName, zu.username, zu.id
     tags:
       - zoom
       - user
@@ -18,9 +18,9 @@ questions:
       on their account.
     queries:
       - name: good
-        query: FIND zoom_user AS zu WHERE zu.meetingSecurityRequirePasswordForScheduledMeeting=true RETURN zu.username
+        query: FIND zoom_user WITH meetingSecurityRequirePasswordForScheduledMeeting=true as zu return zu.displayName, zu.username, zu.id
       - name: bad
-        query: FIND zoom_user AS zu WHERE zu.meetingSecurityRequirePasswordForScheduledMeeting!=true RETURN zu.username
+        query: FIND zoom_user WITH meetingSecurityRequirePasswordForScheduledMeeting!=true as zu return zu.displayName, zu.username, zu.id
     tags:
       - zoom
       - user
@@ -31,9 +31,9 @@ questions:
       on their account.
     queries:
       - name: good
-        query: FIND zoom_user AS zu WHERE zu.inMeetingE2eEncryption=true RETURN zu.username
+        query: FIND zoom_user WITH zu.inMeetingE2eEncryption=true AS zu RETURN zu.displayName, zu.username, zu.id
       - name: bad
-        query: FIND zoom_user AS zu WHERE zu.inMeetingE2eEncryption!=true RETURN zu.username
+        query: FIND zoom_user WITH zu.inMeetingE2eEncryption!=true AS zu RETURN zu.displayName, zu.username, zu.id
     tags:
       - zoom
       - user
