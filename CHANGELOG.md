@@ -8,6 +8,17 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.1.0] - 2022-01-05
+
+### Added
+
+- Questions file now in place with canned J1QL Zoom queries.
+
+### Fixed
+
+- Rate limiting added for handling 429 errors.
+- Small documentation updates.
+
 ## [1.0.0] - 2021-11-24
 
 ### Added
