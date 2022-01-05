@@ -1,4 +1,7 @@
-import { createIntegrationEntity } from '@jupiterone/integration-sdk-core';
+import {
+  createIntegrationEntity,
+  Entity,
+} from '@jupiterone/integration-sdk-core';
 import { Entities } from '../constants';
 import { ZoomGroup } from '../../types';
 
@@ -6,7 +9,7 @@ export function getGroupKey(id: string): string {
   return `zoom_group:${id}`;
 }
 
-export function createGroupEntity(data: ZoomGroup) {
+export function createGroupEntity(data: ZoomGroup): Entity {
   return createIntegrationEntity({
     entityData: {
       source: data,

@@ -1,0 +1,39 @@
+---
+sourceId: managed:template
+integrationDefinitionId: '${integration_definition_id}'
+questions:
+  - id: managed-question-zoom-access-list
+    title: Who has access to Zoom in my organization?
+    description: Returns a list of users with Zoom access.
+    queries:
+      - name: good
+        query: FIND zoom_user AS zu RETURN zu.displayName, zu.username, zu.id
+    tags:
+      - zoom
+      - user
+  - id: managed-question-zoom-scheduled-meeting-required-password
+    title: Which users of Zoom do not require passwords for scheduled meetings?
+    description:
+      Returns a list of Zoom users who do not require password protected scheduled meetings
+      on their account.
+    queries:
+      - name: good
+        query: FIND zoom_user WITH meetingSecurityRequirePasswordForScheduledMeeting=true as zu return zu.displayName, zu.username, zu.id
+      - name: bad
+        query: FIND zoom_user WITH meetingSecurityRequirePasswordForScheduledMeeting!=true as zu return zu.displayName, zu.username, zu.id
+    tags:
+      - zoom
+      - user
+  - id: managed-question-zoom-e2e-encryption
+    title: Which users of Zoom do not have end to end encryption enabled?
+    description:
+      Returns a list of Zoom users who do not have end to end encryption enabled
+      on their account.
+    queries:
+      - name: good
+        query: FIND zoom_user WITH inMeetingE2eEncryption=true AS zu RETURN zu.displayName, zu.username, zu.id
+      - name: bad
+        query: FIND zoom_user WITH inMeetingE2eEncryption!=true AS zu RETURN zu.displayName, zu.username, zu.id
+    tags:
+      - zoom
+      - user

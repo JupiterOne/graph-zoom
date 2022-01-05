@@ -1,4 +1,7 @@
-import { createIntegrationEntity } from '@jupiterone/integration-sdk-core';
+import {
+  createIntegrationEntity,
+  Entity,
+} from '@jupiterone/integration-sdk-core';
 import { Entities } from '../constants';
 import {
   ZoomUser,
@@ -28,7 +31,7 @@ export function createUserEntity({
     | ZoomUserSettingsRecordingAuthentication
     | undefined;
   meetingSecuritySettings: ZoomUserSettingsMeetingSecurity | undefined;
-}) {
+}): Entity {
   let userSettingsProps = {};
   if (userSettings) {
     userSettingsProps = {
