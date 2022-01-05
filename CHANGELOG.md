@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+### Fixed
+
+- Properly including questions file in NPM package.
+
 ## [1.1.0] - 2022-01-05
 
 ### Added
