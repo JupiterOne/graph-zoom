@@ -453,7 +453,7 @@ describe('#buildAccountAndGroupsRelationship', () => {
     );
     expect(account.length).toBe(1);
     expect(account).toMatchGraphObjectSchema({
-      _class: ['User'],
+      _class: ['Account'],
       schema: {
         additionalProperties: false,
         properties: {
@@ -463,8 +463,7 @@ describe('#buildAccountAndGroupsRelationship', () => {
           },
           _type: { const: 'zoom_account' },
           name: { type: 'string' },
-          username: { type: 'string' },
-          email: { type: 'string' },
+          accountId: { type: 'string' },
         },
       },
     });

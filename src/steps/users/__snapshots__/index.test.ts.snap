@@ -5,9 +5,9 @@ Object {
   "collectedEntities": Array [
     Object {
       "_class": Array [
-        "User",
+        "Account",
       ],
-      "_key": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA",
+      "_key": "zoom_account:N0oChUdLTrCZLfk9JXp3Hw",
       "_rawData": Array [
         Object {
           "name": "default",
@@ -49,14 +49,13 @@ Object {
         },
       ],
       "_type": "zoom_account",
+      "accountId": "N0oChUdLTrCZLfk9JXp3Hw",
       "active": true,
       "createdOn": undefined,
-      "displayName": "JupiterOne Development",
-      "email": "development@jupiterone.dev",
+      "displayName": "7011249145",
       "id": "H9Yx0-O8QUCXVIseYAsjaA",
-      "name": "JupiterOne Development",
+      "name": "7011249145",
       "status": "active",
-      "username": "development@jupiterone.dev",
     },
     Object {
       "_class": Array [
@@ -534,16 +533,16 @@ Object {
   "collectedRelationships": Array [
     Object {
       "_class": "HAS",
-      "_fromEntityKey": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA",
-      "_key": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA|has|zoom_user:a18JbG_DQketjPo0Y8wYqg",
+      "_fromEntityKey": "zoom_account:N0oChUdLTrCZLfk9JXp3Hw",
+      "_key": "zoom_account:N0oChUdLTrCZLfk9JXp3Hw|has|zoom_user:a18JbG_DQketjPo0Y8wYqg",
       "_toEntityKey": "zoom_user:a18JbG_DQketjPo0Y8wYqg",
       "_type": "zoom_account_has_user",
       "displayName": "HAS",
     },
     Object {
       "_class": "HAS",
-      "_fromEntityKey": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA",
-      "_key": "zoom_account:H9Yx0-O8QUCXVIseYAsjaA|has|zoom_user:H9Yx0-O8QUCXVIseYAsjaA",
+      "_fromEntityKey": "zoom_account:N0oChUdLTrCZLfk9JXp3Hw",
+      "_key": "zoom_account:N0oChUdLTrCZLfk9JXp3Hw|has|zoom_user:H9Yx0-O8QUCXVIseYAsjaA",
       "_toEntityKey": "zoom_user:H9Yx0-O8QUCXVIseYAsjaA",
       "_type": "zoom_account_has_user",
       "displayName": "HAS",
