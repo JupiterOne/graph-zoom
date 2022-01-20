@@ -48,14 +48,15 @@ If you need help with this integration, please contact
 1. From the configuration **Gear Icon**, select **Integrations**.
 2. Scroll to the **Zoom** integration tile and click it.
 3. Click the **Add Configuration** button and configure the following settings:
-    - Enter the **Account Name** by which you'd like to identify this Zoom account
-      in JupiterOne. Ingested entities will have this value stored in
-      `tag.AccountName` when **Tag with Account Name** is checked.
-    - Enter a **Description** that will further assist your team when identifying
-      the integration instance.
-    - Select a **Polling Interval** that you feel is sufficient for your monitoring
-      needs. You may leave this as `DISABLED` and manually execute the integration.
-    - Enter the **Zoom API Key** generated for use by JupiterOne.
+   - Enter the **Account Name** by which you'd like to identify this Zoom
+     account in JupiterOne. Ingested entities will have this value stored in
+     `tag.AccountName` when **Tag with Account Name** is checked.
+   - Enter a **Description** that will further assist your team when identifying
+     the integration instance.
+   - Select a **Polling Interval** that you feel is sufficient for your
+     monitoring needs. You may leave this as `DISABLED` and manually execute the
+     integration.
+   - Enter the **Zoom API Key** generated for use by JupiterOne.
 4. Click **Create Configuration** once all values are provided.
 
 # How to Uninstall
@@ -85,7 +86,7 @@ The following entities are created:
 
 | Resources | Entity `_type` | Entity `_class` |
 | --------- | -------------- | --------------- |
-| Account   | `zoom_account` | `User`          |
+| Account   | `zoom_account` | `Account`       |
 | Group     | `zoom_group`   | `Group`         |
 | Role      | `zoom_role`    | `AccessRole`    |
 | User      | `zoom_user`    | `User`          |

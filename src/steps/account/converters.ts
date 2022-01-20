@@ -16,10 +16,9 @@ export function createAccountEntity(data: ZoomUser): Entity {
       assign: {
         _class: Entities.ACCOUNT._class,
         _type: Entities.ACCOUNT._type,
-        _key: getAccountKey(data.id),
-        username: data.email,
-        name: `${data.first_name} ${data.last_name}`,
-        email: data.email,
+        _key: getAccountKey(data.account_id),
+        accountId: data.account_id,
+        name: `${data.account_number}`,
       },
     },
   });
