@@ -26,7 +26,7 @@ export const Entities: Record<
   ACCOUNT: {
     resourceName: 'Account',
     _type: 'zoom_account',
-    _class: 'User',
+    _class: 'Account',
   },
   USER: {
     resourceName: 'User',

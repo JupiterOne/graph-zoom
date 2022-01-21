@@ -10,6 +10,8 @@ Object {
     Object {
       "name": "default",
       "rawData": Object {
+        "account_id": "sample-account-id",
+        "account_number": 1234,
         "created_at": "2000-01-23T11:23:52Z",
         "dept": "sample-dept",
         "email": "test@email.com",

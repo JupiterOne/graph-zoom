@@ -20,6 +20,8 @@ export type ZoomUser = {
   dept: string;
   group_ids: string[];
   host_key: string;
+  account_id: string;
+  account_number: number;
 };
 
 export type ZoomGroup = {

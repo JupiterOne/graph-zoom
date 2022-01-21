@@ -3,13 +3,15 @@
 exports[`#createAccountEntity should convert to entity 1`] = `
 Object {
   "_class": Array [
-    "User",
+    "Account",
   ],
-  "_key": "zoom_account:sample-id",
+  "_key": "zoom_account:sample-account-id",
   "_rawData": Array [
     Object {
       "name": "default",
       "rawData": Object {
+        "account_id": "sample-account-id",
+        "account_number": 1234,
         "created_at": "2000-01-23T11:23:52Z",
         "dept": "sample-dept",
         "email": "test@email.com",
@@ -36,13 +38,12 @@ Object {
     },
   ],
   "_type": "zoom_account",
+  "accountId": "sample-account-id",
   "active": true,
   "createdOn": undefined,
-  "displayName": "John Doe",
-  "email": "test@email.com",
+  "displayName": "1234",
   "id": "sample-id",
-  "name": "John Doe",
+  "name": "1234",
   "status": "active",
-  "username": "test@email.com",
 }
 `;
