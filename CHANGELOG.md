@@ -8,6 +8,10 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.2.0] - 2022-01-24
+
+### Fixed
+
 - Switched zoom_account to be Account _class.
 - Small cleanup of managed questions to alias results.
 
