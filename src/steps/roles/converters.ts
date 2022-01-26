@@ -20,6 +20,7 @@ export function createRoleEntity(data: ZoomRole): Entity {
         displayName: data.name,
         totalMembers: data.total_members,
         description: data.description,
+        admin: data.name === 'Owner' || data.name === 'Admin',
       },
     },
   });

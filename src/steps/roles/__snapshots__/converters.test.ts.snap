@@ -18,6 +18,7 @@ Object {
     },
   ],
   "_type": "zoom_role",
+  "admin": false,
   "createdOn": undefined,
   "description": "sample-description",
   "displayName": "group-name",
