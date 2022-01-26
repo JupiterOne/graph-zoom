@@ -8,11 +8,18 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.3.0] - 2022-01-26
+
+### Added
+
+- Added `admin` boolean flag to `zoom_role` -- `admin: true` if the role name is
+  `Admin` or `Owner`.
+
 ## [1.2.0] - 2022-01-24
 
 ### Fixed
 
-- Switched zoom_account to be Account _class.
+- Switched zoom_account to be Account \_class.
 - Small cleanup of managed questions to alias results.
 
 ## [1.1.1] - 2022-01-05

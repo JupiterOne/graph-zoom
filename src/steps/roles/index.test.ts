@@ -59,6 +59,7 @@ describe('#fetchRoles', () => {
           name: { type: 'string' },
           totalMembers: { type: 'number' },
           description: { type: 'string' },
+          admin: { type: 'boolean' },
         },
       },
     });
@@ -397,6 +398,7 @@ describe('#buildUserAndRolesRelationship', () => {
           name: { type: 'string' },
           totalMembers: { type: 'number' },
           description: { type: 'string' },
+          admin: { type: 'boolean' },
         },
       },
     });
@@ -486,6 +488,7 @@ describe('#buildAccountAndRolesRelationship', () => {
           name: { type: 'string' },
           totalMembers: { type: 'number' },
           description: { type: 'string' },
+          admin: { type: 'boolean' },
         },
       },
     });
