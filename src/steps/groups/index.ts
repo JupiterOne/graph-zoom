@@ -7,7 +7,7 @@ import {
 } from '@jupiterone/integration-sdk-core';
 
 import { IntegrationConfig } from '../../config';
-import { createAPIClient } from '../../client';
+import getOrCreateAPIClient from '../../getOrCreateAPIClient';
 import {
   ACCOUNT_ENTITY_KEY,
   Entities,
@@ -21,7 +21,7 @@ export async function fetchGroups({
   instance,
   jobState,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
-  const apiClient = createAPIClient(instance.config);
+  const apiClient = await getOrCreateAPIClient(instance.config);
 
   await apiClient.iterateGroups(async (group) => {
     await jobState.addEntity(createGroupEntity(group));
@@ -32,7 +32,7 @@ export async function buildUserAndGroupsRelationship({
   instance,
   jobState,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
-  const apiClient = createAPIClient(instance.config);
+  const apiClient = await getOrCreateAPIClient(instance.config);
 
   await jobState.iterateEntities(
     { _type: Entities.GROUP._type },

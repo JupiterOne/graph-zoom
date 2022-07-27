@@ -30,7 +30,9 @@ it('auth error', async () => {
 
   const executionContext = createMockExecutionContext({
     instanceConfig: {
-      zoomAccessToken: 'INVALID',
+      accountId: 'INVALID',
+      clientId: 'INVALID',
+      clientSecret: 'INVALID',
       scopes: 'INVALID',
     },
   });

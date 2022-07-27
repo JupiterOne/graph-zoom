@@ -4,10 +4,18 @@ import {
   IntegrationInstanceConfigFieldMap,
   IntegrationInstanceConfig,
 } from '@jupiterone/integration-sdk-core';
-import { createAPIClient } from './client';
+import getOrCreateAPIClient from './getOrCreateAPIClient';
 
 export const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
-  zoomAccessToken: {
+  accountId: {
+    type: 'string',
+    mask: true,
+  },
+  clientId: {
+    type: 'string',
+    mask: true,
+  },
+  clientSecret: {
     type: 'string',
     mask: true,
   },
@@ -17,10 +25,9 @@ export const instanceConfigFields: IntegrationInstanceConfigFieldMap = {
 };
 
 export interface IntegrationConfig extends IntegrationInstanceConfig {
-  /**
-   * The OAuth token used to authenticate requests.
-   */
-  zoomAccessToken: string;
+  accountId: string;
+  clientId: string;
+  clientSecret: string;
   scopes: string;
 }
 
@@ -29,12 +36,12 @@ export async function validateInvocation(
 ) {
   const { config } = context.instance;
 
-  if (!config.zoomAccessToken || !config.scopes) {
+  if (!config.accountId || !config.clientId || !config.clientSecret || !config.scopes) {
     throw new IntegrationValidationError(
-      'Config requires zoom access token and scopes field. Please generate from OAuth server.',
+      'Config requires all of { accountId, clientId, clientSecret, scopes }.',
     );
   }
 
-  const apiClient = createAPIClient(config);
+  const apiClient = await getOrCreateAPIClient(config);
   await apiClient.verifyAuthentication();
 }
