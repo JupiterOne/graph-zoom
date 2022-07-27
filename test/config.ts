@@ -7,7 +7,7 @@ if (process.env.LOAD_ENV) {
     path: path.join(__dirname, '../.env'),
   });
 }
-const DEFAULT_ACCOUNT_ID = 'dummy-zoom-account-id';
+const DEFAULT_ACCOUNT_ID = 'N0oChUdLTrCZLfk9JXp3Hw';
 const DEFAULT_CLIENT_ID = 'dummy-client-id';
 const DEFAULT_CLIENT_SECRET = 'highly-fake-secret';
 const DEFAULT_SCOPES = 'dummy-zoom-scopes-list';
