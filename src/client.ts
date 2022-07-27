@@ -42,7 +42,7 @@ export class APIClient {
 
   private authenticationToken: string;
 
-  private authenticationUri(accountId: string): string {
+  public authenticationUri(accountId: string): string {
     return `https://zoom.us/oauth/token?grant_type=account_credentials&account_id=${accountId}`;
   }
 
