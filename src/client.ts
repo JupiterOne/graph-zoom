@@ -51,18 +51,24 @@ export class APIClient {
   }
 
   public async initializeAccessToken() {
-    const authorizationString = this.config.clientId + ':' + this.config.clientSecret;
-    const authorizationEncoded = Buffer.from(authorizationString).toString('base64');
+    const authorizationString =
+      this.config.clientId + ':' + this.config.clientSecret;
+    const authorizationEncoded = Buffer.from(authorizationString).toString(
+      'base64',
+    );
 
     const result = await retry(
       async () => {
-        const response = await fetch(this.authenticationUri(this.config.accountId), {
-          method: 'POST',
-          headers: {
-            Authorization: `Basic ${authorizationEncoded}`,
-            'Content-Type': 'application/x-www-form-urlencoded',
+        const response = await fetch(
+          this.authenticationUri(this.config.accountId),
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Basic ${authorizationEncoded}`,
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
           },
-        });
+        );
         if (!response.ok) {
           throw new ResponseError({
             endpoint: this.authenticationUri(this.config.accountId),
@@ -86,7 +92,7 @@ export class APIClient {
         },
       },
     );
-    const body = await result.json()
+    const body = await result.json();
     this.authenticationToken = body.access_token;
   }
 

@@ -36,7 +36,12 @@ export async function validateInvocation(
 ) {
   const { config } = context.instance;
 
-  if (!config.accountId || !config.clientId || !config.clientSecret || !config.scopes) {
+  if (
+    !config.accountId ||
+    !config.clientId ||
+    !config.clientSecret ||
+    !config.scopes
+  ) {
     throw new IntegrationValidationError(
       'Config requires all of { accountId, clientId, clientSecret, scopes }.',
     );
