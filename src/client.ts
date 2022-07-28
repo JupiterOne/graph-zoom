@@ -84,7 +84,7 @@ export class APIClient {
         factor: 2,
         maxAttempts: 10,
         handleError: (err, context) => {
-          const rateLimitType = err.response.headers.get('X-RateLimit-Type');
+          const rateLimitType = err.response?.headers?.get('X-RateLimit-Type');
           // only retry on 429 && per second limit
           if (!(err.status === 429 && rateLimitType === 'QPS')) {
             context.abort();
