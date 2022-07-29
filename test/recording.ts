@@ -2,7 +2,7 @@ import {
   Recording,
   setupRecording,
   SetupRecordingInput,
-  mutations
+  mutations,
 } from '@jupiterone/integration-sdk-testing';
 
 export { Recording };
@@ -30,6 +30,6 @@ export function setupZoomRecording(
           );
         }
       }
-    }
+    },
   });
 }

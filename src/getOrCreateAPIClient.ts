@@ -9,7 +9,7 @@ export default async function getOrCreateAPIClient(
 ): Promise<APIClient> {
   if (!client) {
     client = new APIClient(config);
-    try{
+    try {
       await client.initializeAccessToken();
     } catch (err) {
       throw new IntegrationProviderAuthenticationError({
