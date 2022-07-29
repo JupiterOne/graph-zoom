@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.4.0] - 2022-07-29
+
+### Changed
+
+- Authentication is now performed using server-to-server OAuth instead of client
+  OAuth.
+
 ## [1.3.0] - 2022-01-26
 
 ### Added
