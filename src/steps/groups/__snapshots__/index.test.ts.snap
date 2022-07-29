@@ -704,7 +704,7 @@ Object {
             "id": "ppUAdwEBRFCdRE0mfLttog",
             "in_directory": false,
             "name": "Test Group",
-            "total_members": 1,
+            "total_members": 2,
           },
         },
       ],
@@ -714,12 +714,37 @@ Object {
       "displayName": "Test Group",
       "id": "ppUAdwEBRFCdRE0mfLttog",
       "name": "Test Group",
-      "totalMembers": 1,
+      "totalMembers": 2,
+    },
+    Object {
+      "_class": Array [
+        "Group",
+      ],
+      "_key": "zoom_group:dSHPJbpfQo6uS1a0_iznyg",
+      "_rawData": Array [
+        Object {
+          "name": "default",
+          "rawData": Object {
+            "directory_privacy": 2,
+            "id": "dSHPJbpfQo6uS1a0_iznyg",
+            "in_directory": false,
+            "name": "Test Group 2",
+            "total_members": 0,
+          },
+        },
+      ],
+      "_type": "zoom_group",
+      "createdOn": undefined,
+      "directoryPrivacy": 2,
+      "displayName": "Test Group 2",
+      "id": "dSHPJbpfQo6uS1a0_iznyg",
+      "name": "Test Group 2",
+      "totalMembers": 0,
     },
   ],
   "encounteredTypes": Array [
     "zoom_group",
   ],
-  "numCollectedEntities": 1,
+  "numCollectedEntities": 2,
 }
 `;

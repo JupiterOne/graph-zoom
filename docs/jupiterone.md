@@ -17,8 +17,8 @@
 
 ## Requirements
 
-- Zoom supports the OAuth2 Client Credential flow. A Zoom pro account is
-  optional but is highly recommended.
+- Zoom supports the Server-to-Server OAuth2 Client Credential flow. A Zoom pro
+  account is optional but is highly recommended.
 - You must have permission in JupiterOne to install new integrations.
 
 ## Support
@@ -30,22 +30,22 @@ If you need help with this integration, please contact
 
 ### In Zoom
 
-1. Go to [Create App](https://marketplace.zoom.us/develop/create) page on Zoom
-   Marketplace and click 'Create' under the OAuth app type.
-2. Enter an app name and choose the 'Account-level app' option. The publish app
-   option will depend on your needs.
-3. Take note of your `Client ID` and your `Client secret` and supply it to the
-   [oauth-server's .env](../oauth-server/README.md).
-4. Enter 'http://localhost:5000/redirect' to the Redirect URL for OAuth.
-5. Add 'http://localhost:5000/redirect' to the OAuth allow list.
-6. Supply the required information.
-7. On scopes, add `group:read:admin`, `role:read:admin`, and `user:read:admin`.
-8. The app is now ready. Proceed to authentication to generate your
-   `ZOOM_ACCESS_TOKEN`.
+1. Go to [Build App](https://marketplace.zoom.us/develop/create) page on Zoom
+   Marketplace and click 'Create' under the Server-to-Server OAuth app type.
+2. Enter an app name to begin creation.
+3. Take note of your `Account ID`, `Client ID`, and `Client secret` and supply
+   it to the .env file.
+4. Supply the required information for each section. Zoom will prompt you if any
+   required fields are omitted.
+5. On scopes, add `group:read:admin`, `role:read:admin`, `user:read:admin`, and
+   `account:read:admin`. If you cannot or choose not to provide all the listed
+   scopes the steps requiring the missing scopes will be disabled.
+6. On the final screen once all required information has been provided, an
+   `Activate your app` button will appear. Click it to complete app creation.
 
 ### In JupiterOne
 
-1. From the configuration **Gear Icon**, select **Integrations**.
+1. Select **Integrations** on the top navigation bar.
 2. Scroll to the **Zoom** integration tile and click it.
 3. Click the **Add Configuration** button and configure the following settings:
    - Enter the **Account Name** by which you'd like to identify this Zoom
@@ -56,7 +56,8 @@ If you need help with this integration, please contact
    - Select a **Polling Interval** that you feel is sufficient for your
      monitoring needs. You may leave this as `DISABLED` and manually execute the
      integration.
-   - Enter the **Zoom API Key** generated for use by JupiterOne.
+   - Enter the **Account ID**, **Client ID**, **Client Secret**, and **Scoopes**
+     generated for use by JupiterOne.
 4. Click **Create Configuration** once all values are provided.
 
 # How to Uninstall

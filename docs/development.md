@@ -15,32 +15,26 @@ This integration requires a Zoom
 1. Register for a Zoom account. A pro account is not required but some resources
    may not be ingested without it.
 
-2. Go to [Create App](https://marketplace.zoom.us/develop/create) page on Zoom
-   Marketplace and click 'Create' under the OAuth app type.
+2. Go to [Build App](https://marketplace.zoom.us/develop/create) page on Zoom
+   Marketplace and click 'Create' under the Server-to-Server OAuth app type.
 
-3. Enter an app name and choose the 'Account-level app' option. The publish app
-   option will depend on your needs.
+3. Enter an app name to begin creation.
 
-4. Take note of your `Client ID` and your `Client secret` and supply it to the
-   [oauth-server's .env](../oauth-server/README.md).
+4. Take note of your `Account ID`, `Client ID`, and `Client secret` and supply
+   it to the .env file.
 
-5. Enter 'http://localhost:5000/redirect' to the Redirect URL for OAuth.
+5. Supply the required information for each section. Zoom will prompt you if any
+   required fields are omitted.
 
-6. Add 'http://localhost:5000/redirect' to the OAuth allow list.
+6. On scopes, add `group:read:admin`, `role:read:admin`, `user:read:admin`, and
+   `account:read:admin`. If you cannot or choose not to provide all the listed
+   scopes the steps requiring the missing scopes will be disabled.
 
-7. Supply the required information.
-
-8. On scopes, add `group:read:admin`, `role:read:admin`, and `user:read:admin`.
-
-9. The app is now ready. Proceed to authentication to generate your
-   `ZOOM_ACCESS_TOKEN`.
+7. On the final screen once all required information has been provided, an
+   `Activate your app` button will appear. Click it to complete app creation.
 
 ## Authentication
 
-To start the integration, we need to provide a `ZOOM_ACCESS_TOKEN` to our
-`.env`. Luckily, we have supplied an [oauth-server](../oauth-server) to get the
-token for us. Please follow the OAuth server's
-[README.md](../oauth-server/README.md) to generate the access token. Once that's
-done, you should now be able to start contributing to this integration. The
-integration will pull in the `ZOOM_ACCESS_TOKEN` variable from the `.env` file
-and use it when making requests.
+To start the integration, we need to provide the ACCOUNT_ID, CLIENT_ID, and
+CLIENT_SECRET from the server-to-server oauth app creation. Once this has been
+provided in the .env file, the integration will be able to authenticate and run.

@@ -40,8 +40,60 @@ export class APIClient {
 
   private readonly paginateEntitiesPerPage = 30;
 
+  private authenticationToken: string;
+
+  public authenticationUri(accountId: string): string {
+    return `https://zoom.us/oauth/token?grant_type=account_credentials&account_id=${accountId}`;
+  }
+
   private withBaseUri(path: string): string {
     return `https://api.zoom.us/v2/${path}`;
+  }
+
+  public async initializeAccessToken() {
+    const authorizationString =
+      this.config.clientId + ':' + this.config.clientSecret;
+    const authorizationEncoded = Buffer.from(authorizationString).toString(
+      'base64',
+    );
+
+    const result = await retry(
+      async () => {
+        const response = await fetch(
+          this.authenticationUri(this.config.accountId),
+          {
+            method: 'POST',
+            headers: {
+              Authorization: `Basic ${authorizationEncoded}`,
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+          },
+        );
+        if (!response.ok) {
+          throw new ResponseError({
+            endpoint: this.authenticationUri(this.config.accountId),
+            status: response.status,
+            statusText: response.statusText,
+            response,
+          });
+        }
+        return response;
+      },
+      {
+        delay: 1000,
+        factor: 2,
+        maxAttempts: 10,
+        handleError: (err, context) => {
+          const rateLimitType = err.response?.headers?.get('X-RateLimit-Type');
+          // only retry on 429 && per second limit
+          if (!(err.status === 429 && rateLimitType === 'QPS')) {
+            context.abort();
+          }
+        },
+      },
+    );
+    const body = await result.json();
+    this.authenticationToken = body.access_token;
   }
 
   private async request(
@@ -54,7 +106,7 @@ export class APIClient {
           const response = await fetch(uri, {
             method,
             headers: {
-              Authorization: `Bearer ${this.config.zoomAccessToken}`,
+              Authorization: `Bearer ${this.authenticationToken}`,
             },
           });
           if (!response.ok) {
