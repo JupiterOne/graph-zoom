@@ -41,7 +41,7 @@ If you need help with this integration, please contact
    `account:read:admin`. If you cannot or choose not to provide all the listed
    scopes the steps requiring the missing scopes will be disabled.
 6. On the final screen once all required information has been provided, an
-   `Activate your app` button will appear. Click it to complete app creation.
+   `Activate your app` button will appear. Click it to complete app creation. 
 
 ### In JupiterOne
 
