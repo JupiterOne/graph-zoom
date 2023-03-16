@@ -19,6 +19,7 @@
 
 - Zoom supports the Server-to-Server OAuth2 Client Credential flow. A Zoom pro
   account is optional but is highly recommended.
+- You must have the Zoom owner role to install the integration.
 - You must have permission in JupiterOne to install new integrations.
 
 ## Support
