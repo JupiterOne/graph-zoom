@@ -20,8 +20,9 @@ import { getUserKey } from '../users/converters';
 export async function fetchGroups({
   instance,
   jobState,
+  logger,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
-  const apiClient = await getOrCreateAPIClient(instance.config);
+  const apiClient = await getOrCreateAPIClient(instance.config, logger);
 
   await apiClient.iterateGroups(async (group) => {
     await jobState.addEntity(createGroupEntity(group));
@@ -31,8 +32,9 @@ export async function fetchGroups({
 export async function buildUserAndGroupsRelationship({
   instance,
   jobState,
+  logger,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
-  const apiClient = await getOrCreateAPIClient(instance.config);
+  const apiClient = await getOrCreateAPIClient(instance.config, logger);
 
   await jobState.iterateEntities(
     { _type: Entities.GROUP._type },

@@ -164,12 +164,14 @@ describe('#buildUserAndRolesRelationship', () => {
           scheduleMeetingMeetingPasswordRequirementOnlyAllowNumeric: {
             type: 'boolean',
           },
-          scheduleMeetingMeetingPasswordRequirementHaveUpperAndLowerCharacters: {
-            type: 'boolean',
-          },
-          scheduleMeetingMeetingPasswordRequirementConsecutiveCharactersLength: {
-            type: 'number',
-          },
+          scheduleMeetingMeetingPasswordRequirementHaveUpperAndLowerCharacters:
+            {
+              type: 'boolean',
+            },
+          scheduleMeetingMeetingPasswordRequirementConsecutiveCharactersLength:
+            {
+              type: 'number',
+            },
           scheduleMeetingMeetingPasswordRequirementWeakEnhanceDetection: {
             type: 'boolean',
           },
@@ -315,9 +317,10 @@ describe('#buildUserAndRolesRelationship', () => {
           audioConferencingTollFreeAndFeeBasedTollCallEnable: {
             type: 'boolean',
           },
-          audioConferencingTollFreeAndFeeBasedTollCallAllowWebinarAttendeesDial: {
-            type: 'boolean',
-          },
+          audioConferencingTollFreeAndFeeBasedTollCallAllowWebinarAttendeesDial:
+            {
+              type: 'boolean',
+            },
           meetingAuthentication: { type: 'boolean' },
           recordingAuthentication: { type: 'boolean' },
 
@@ -338,12 +341,14 @@ describe('#buildUserAndRolesRelationship', () => {
           meetingSecurityMeetingPasswordRequirementOnlyAllowNumeric: {
             type: 'boolean',
           },
-          meetingSecurityMeetingPasswordRequirementHaveUpperAndLowerCharacters: {
-            type: 'boolean',
-          },
-          meetingSecurityMeetingPasswordRequirementConsecutiveCharactersLength: {
-            type: 'number',
-          },
+          meetingSecurityMeetingPasswordRequirementHaveUpperAndLowerCharacters:
+            {
+              type: 'boolean',
+            },
+          meetingSecurityMeetingPasswordRequirementConsecutiveCharactersLength:
+            {
+              type: 'number',
+            },
           meetingSecurityMeetingPasswordRequirementWeakEnhanceDetection: {
             type: 'boolean',
           },
@@ -364,9 +369,10 @@ describe('#buildUserAndRolesRelationship', () => {
           meetingSecurityWaitingRoomSettingsWhitelistedDomainsForWaitingRoom: {
             type: 'string',
           },
-          meetingSecurityWaitingRoomSettingsUsersWhoCanAdmitParticipantsFromWaitingRoom: {
-            type: 'number',
-          },
+          meetingSecurityWaitingRoomSettingsUsersWhoCanAdmitParticipantsFromWaitingRoom:
+            {
+              type: 'number',
+            },
           meetingSecurityAutoSecurity: { type: 'boolean' },
           meetingSecurityBlockUserDomain: { type: 'boolean' },
           meetingSecurityBlockUserDomainList: {
