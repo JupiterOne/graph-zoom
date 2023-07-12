@@ -2,6 +2,7 @@ import fetch, { Response } from 'node-fetch';
 import { retry } from '@lifeomic/attempt';
 
 import {
+  IntegrationLogger,
   IntegrationProviderAPIError,
   IntegrationProviderAuthenticationError,
 } from '@jupiterone/integration-sdk-core';
@@ -36,9 +37,9 @@ class ResponseError extends IntegrationProviderAPIError {
 }
 
 export class APIClient {
-  constructor(readonly config: IntegrationConfig) {}
+  constructor(readonly config: IntegrationConfig, readonly logger: IntegrationLogger) {}
 
-  private readonly paginateEntitiesPerPage = 30;
+  private readonly paginateEntitiesPerPage = 100;
 
   private authenticationToken: string;
 
@@ -96,6 +97,13 @@ export class APIClient {
     this.authenticationToken = body.access_token;
   }
 
+  private isErrorRetryable(status: number) {
+    if(status === 401 || status === 429) {
+      return true;
+    }
+    return false;
+  }
+
   private async request(
     uri: string,
     method: 'GET' | 'HEAD' = 'GET',
@@ -123,10 +131,19 @@ export class APIClient {
           delay: 1000,
           factor: 2,
           maxAttempts: 10,
-          handleError: (err, context) => {
+          handleError: async (err, context) => {
             const rateLimitType = err.response.headers.get('X-RateLimit-Type');
-            // only retry on 429 && per second limit
-            if (!(err.status === 429 && rateLimitType === 'QPS')) {
+            if (!(this.isErrorRetryable(err.status))) {
+              context.abort();
+            }
+
+            if(err.status === 401) {
+              this.logger.info('Received a 401 error.  Requesting a new token.');
+              await this.initializeAccessToken();
+            }
+            else if (err.status === 429 && rateLimitType === 'QPS') {
+              const retryAfter = err.response.headers.get('Retry-After');
+              this.logger.warn({retryAfter}, 'Received a daily rate limit error.');
               context.abort();
             }
           },
