@@ -20,8 +20,9 @@ import { getUserKey } from '../users/converters';
 export async function fetchRoles({
   instance,
   jobState,
+  logger,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
-  const apiClient = await getOrCreateAPIClient(instance.config);
+  const apiClient = await getOrCreateAPIClient(instance.config, logger);
 
   await apiClient.iterateRoles(async (role) => {
     await jobState.addEntity(createRoleEntity(role));
@@ -31,8 +32,9 @@ export async function fetchRoles({
 export async function buildUserAndRolesRelationship({
   instance,
   jobState,
+  logger,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
-  const apiClient = await getOrCreateAPIClient(instance.config);
+  const apiClient = await getOrCreateAPIClient(instance.config, logger);
 
   await jobState.iterateEntities(
     { _type: Entities.ROLE._type },

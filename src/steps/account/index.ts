@@ -11,8 +11,9 @@ import { createAccountEntity } from './converters';
 export async function fetchAccount({
   instance,
   jobState,
+  logger,
 }: IntegrationStepExecutionContext<IntegrationConfig>) {
-  const apiClient = await getOrCreateAPIClient(instance.config);
+  const apiClient = await getOrCreateAPIClient(instance.config, logger);
 
   const currentUser = await apiClient.getCurrentUser();
   const accountEntity = createAccountEntity(currentUser);

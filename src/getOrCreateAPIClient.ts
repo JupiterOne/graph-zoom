@@ -1,14 +1,18 @@
 import { IntegrationConfig } from './config';
 import { APIClient } from './client';
-import { IntegrationProviderAuthenticationError } from '@jupiterone/integration-sdk-core';
+import {
+  IntegrationLogger,
+  IntegrationProviderAuthenticationError,
+} from '@jupiterone/integration-sdk-core';
 
 let client: APIClient;
 
 export default async function getOrCreateAPIClient(
   config: IntegrationConfig,
+  logger: IntegrationLogger,
 ): Promise<APIClient> {
   if (!client) {
-    client = new APIClient(config);
+    client = new APIClient(config, logger);
     try {
       await client.initializeAccessToken();
     } catch (err) {

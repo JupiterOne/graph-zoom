@@ -379,6 +379,9 @@ export class APIClient {
   }
 }
 
-export function createAPIClient(config: IntegrationConfig): APIClient {
-  return new APIClient(config);
+export function createAPIClient(
+  config: IntegrationConfig,
+  logger: IntegrationLogger,
+): APIClient {
+  return new APIClient(config, logger);
 }

@@ -47,6 +47,6 @@ export async function validateInvocation(
     );
   }
 
-  const apiClient = await getOrCreateAPIClient(config);
+  const apiClient = await getOrCreateAPIClient(config, context.logger);
   await apiClient.verifyAuthentication();
 }
