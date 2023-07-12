@@ -37,7 +37,10 @@ class ResponseError extends IntegrationProviderAPIError {
 }
 
 export class APIClient {
-  constructor(readonly config: IntegrationConfig, readonly logger: IntegrationLogger) {}
+  constructor(
+    readonly config: IntegrationConfig,
+    readonly logger: IntegrationLogger,
+  ) {}
 
   private readonly paginateEntitiesPerPage = 100;
 
@@ -98,7 +101,7 @@ export class APIClient {
   }
 
   private isErrorRetryable(status: number) {
-    if(status === 401 || status === 429) {
+    if (status === 401 || status === 429) {
       return true;
     }
     return false;
@@ -133,17 +136,21 @@ export class APIClient {
           maxAttempts: 10,
           handleError: async (err, context) => {
             const rateLimitType = err.response.headers.get('X-RateLimit-Type');
-            if (!(this.isErrorRetryable(err.status))) {
+            if (!this.isErrorRetryable(err.status)) {
               context.abort();
             }
 
-            if(err.status === 401) {
-              this.logger.info('Received a 401 error.  Requesting a new token.');
+            if (err.status === 401) {
+              this.logger.info(
+                'Received a 401 error.  Requesting a new token.',
+              );
               await this.initializeAccessToken();
-            }
-            else if (err.status === 429 && rateLimitType === 'QPS') {
+            } else if (err.status === 429 && rateLimitType === 'QPS') {
               const retryAfter = err.response.headers.get('Retry-After');
-              this.logger.warn({retryAfter}, 'Received a daily rate limit error.');
+              this.logger.warn(
+                { retryAfter },
+                'Received a daily rate limit error.',
+              );
               context.abort();
             }
           },
