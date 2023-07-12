@@ -25,15 +25,12 @@ export async function fetchUsers({
 
   await apiClient.iterateUsers(async (user) => {
     const userSettings = await apiClient.getUserSettings(user.id as string);
-    const meetingAuthenticationSettings = await apiClient.getUserSettingsMeetingAuthentication(
-      user.id as string,
-    );
-    const recordingAuthenticationSettings = await apiClient.getUserSettingsRecordingAuthentication(
-      user.id as string,
-    );
-    const meetingSecuritySettings = await apiClient.getUserSettingsMeetingSecurity(
-      user.id as string,
-    );
+    const meetingAuthenticationSettings =
+      await apiClient.getUserSettingsMeetingAuthentication(user.id as string);
+    const recordingAuthenticationSettings =
+      await apiClient.getUserSettingsRecordingAuthentication(user.id as string);
+    const meetingSecuritySettings =
+      await apiClient.getUserSettingsMeetingSecurity(user.id as string);
 
     await jobState.addEntity(
       createUserEntity({

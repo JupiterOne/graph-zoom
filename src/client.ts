@@ -57,9 +57,8 @@ export class APIClient {
   public async initializeAccessToken() {
     const authorizationString =
       this.config.clientId + ':' + this.config.clientSecret;
-    const authorizationEncoded = Buffer.from(authorizationString).toString(
-      'base64',
-    );
+    const authorizationEncoded =
+      Buffer.from(authorizationString).toString('base64');
 
     const result = await retry(
       async () => {
