@@ -8,6 +8,13 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.5.0] - 2023-07-12
+
+### Changed
+
+- Page size for API queries has been increased.
+- A token refresh is attempted now on 401 errors.
+
 ## [1.4.0] - 2022-07-29
 
 ### Changed
