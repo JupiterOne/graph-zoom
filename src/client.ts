@@ -101,10 +101,7 @@ export class APIClient {
   }
 
   private isErrorRetryable(status: number) {
-    if (status === 401 || status === 429) {
-      return true;
-    }
-    return false;
+    return status === 401 || status === 429;
   }
 
   private async request(
