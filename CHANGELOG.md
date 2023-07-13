@@ -12,6 +12,13 @@ and this project adheres to
 
 ### Changed
 
+- The step to ingest users now checks for duplicates and omits any users
+  returned multiple times from the API.
+
+## [1.5.1] - 2023-07-13
+
+### Changed
+
 - Page size for API queries has been increased.
 - A token refresh is attempted now on 401 errors.
 
