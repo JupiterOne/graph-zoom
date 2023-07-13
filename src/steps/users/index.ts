@@ -47,7 +47,7 @@ export async function fetchUsers({
         }),
       );
     } else {
-      this.logger.info(
+      logger.info(
         {
           userId: user.id,
           lastName: user.last_name,
