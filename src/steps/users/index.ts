@@ -14,7 +14,7 @@ import {
   IntegrationSteps,
   Relationships,
 } from '../constants';
-import { createUserEntity } from './converters';
+import { createUserEntity, getUserKey } from './converters';
 
 export async function fetchUsers({
   instance,
@@ -32,15 +32,30 @@ export async function fetchUsers({
     const meetingSecuritySettings =
       await apiClient.getUserSettingsMeetingSecurity(user.id as string);
 
-    await jobState.addEntity(
-      createUserEntity({
-        user,
-        userSettings,
-        meetingAuthenticationSettings,
-        recordingAuthenticationSettings,
-        meetingSecuritySettings,
-      }),
-    );
+    // We have seen instances of duplicate users being returned.  Based on our
+    // duplicate key tracker, these users were identical not just in their ID, but
+    // across all properties.  Logging duplicates, but these should be safe to
+    // omit.
+    if (!jobState.hasKey(getUserKey(user.id))) {
+      await jobState.addEntity(
+        createUserEntity({
+          user,
+          userSettings,
+          meetingAuthenticationSettings,
+          recordingAuthenticationSettings,
+          meetingSecuritySettings,
+        }),
+      );
+    } else {
+      this.logger.info(
+        {
+          userId: user.id,
+          lastName: user.last_name,
+          firstName: user.first_name,
+        },
+        `User already found in ingested data.  Skipping.`,
+      );
+    }
   });
 }
 
