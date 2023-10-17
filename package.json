@@ -2,6 +2,10 @@
   "name": "@jupiterone/graph-zoom",
   "version": "1.5.1",
   "description": "JupiterOne integration for ingesting data from Zoom",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JupiterOne/graph-zoom"
+  },
   "license": "MPL-2.0",
   "main": "src/index.js",
   "types": "src/index.d.ts",
