@@ -1,6 +1,6 @@
 {
   "name": "@jupiterone/graph-zoom",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "JupiterOne integration for ingesting data from Zoom",
   "repository": {
     "type": "git",
