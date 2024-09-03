@@ -8,6 +8,12 @@ and this project adheres to
 
 ## [Unreleased]
 
+## [1.5.2] - 2024-09-03
+
+### Fixed
+
+- Fixed undefined reference error.
+
 ## [1.5.0] - 2023-07-12
 
 ### Changed

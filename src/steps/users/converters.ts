@@ -362,7 +362,7 @@ export function createUserEntity({
         meetingSecuritySettings.meeting_security?.block_user_domain_list,
       meetingSecurityApprovedOrDeniedCountriesOrRegionsEnable:
         meetingSecuritySettings.meeting_security
-          ?.approved_or_denied_countries_or_regions.enable,
+          ?.approved_or_denied_countries_or_regions?.enable,
     };
   }
 
